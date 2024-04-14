@@ -74,46 +74,19 @@ exports.deleteVeterinario = async (req, res) => {
 };
 
 
-
-// exports.login = async (req, res) => {
-//     try {
-//         const [vet, _] = await Veterinario.findByUsuario(req.body.Usuario);
-//         if (vet.length > 0) {
-//             const isValid = await bcrypt.compare(req.body.Contrasena, vet[0].Contrasena);
-//             if (isValid) {
-//                 const token = jwt.sign(
-//                     { VeterinarioID: vet[0].VeterinarioID, Nombre: vet[0].Nombre, Usuario: vet[0].Usuario, Telefono: vet[0].Telefono },
-//                     'secret', // Asegúrate de usar una clave secreta segura y configurada externamente
-//                     { expiresIn: '1m' }
-//                 );
-//                 res.cookie('token', token, { httpOnly: true });
-//                 res.status(200).json({ message: "Autenticación exitosa", token: token });
-//             } else {
-//                 res.status(401).json({ message: "Contraseña incorrecta" });
-//             }
-//         } else {
-//             res.status(404).json({ message: "Usuario no encontrado" });
-//         }
-//     } catch (error) {
-//         console.error("Error en el proceso de login:", error);
-//         res.status(500).json({ message: "Error en la autenticación", error: error.message });
-//     }
-// };
-
 exports.login = async (req, res) => {
     try {
         const vets = await Veterinario.findByUsuario(req.body.Usuario);
         if (vets && vets.length > 0) {
-            const vet = vets[0]; // Asume que el primer resultado es el veterinario correcto
+            const vet = vets[0];
             const isValid = await bcrypt.compare(req.body.Contrasena, vet.Contrasena);
             if (isValid) {
                 const token = jwt.sign(
                     { VeterinarioID: vet.VeterinarioID, Nombre: vet.Nombre, Usuario: vet.Usuario, Telefono: vet.Telefono },
-                    'secret', // Cambia 'secret' por tu clave secreta real
-                    { expiresIn: '1h' } // O el tiempo que consideres necesario
+                    'secret',
+                    { expiresIn: '1h' }
                 );
-                res.cookie('token', token, { httpOnly: true });
-                res.status(200).json({ message: "Autenticación exitosa", token: token });
+                res.status(200).json({ message: "Autenticación exitosa", token: token, veterinario: vet });
             } else {
                 res.status(401).json({ message: "Contraseña incorrecta" });
             }
@@ -127,3 +100,52 @@ exports.login = async (req, res) => {
 };
 
 
+
+exports.logout = (req, res) => {
+    res.cookie('token', '', { expires: new Date(0) }); // Establece una cookie 'token' con una fecha de expiración en el pasado
+    res.status(200).json({ message: "Logout exitoso" });
+};
+
+
+exports.updateVeterinarioInfo = async (req, res) => {
+    try {
+        const vet = {
+            VeterinarioID: req.params.id,
+            Nombre: req.body.Nombre,
+            Usuario: req.body.Usuario,
+            Especialidad: req.body.Especialidad,
+            Telefono: req.body.Telefono,
+            CorreoElectronico: req.body.CorreoElectronico
+        };
+        await Veterinario.updateInfo(vet);
+        res.status(200).json({ message: "Información del veterinario actualizada correctamente" });
+    } catch (error) {
+        res.status(500).json({ message: "Error al actualizar la información", error: error });
+    }
+};
+
+// En tu veterinarioController.js
+exports.updateVeterinarioPassword = async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    const { id } = req.params; // Asegúrate de que el ID se esté recibiendo correctamente.
+    console.log("ID:", id, "Current Password:", currentPassword, "New Password:", newPassword);
+
+    try {
+        const [veterinarian] = await Veterinario.findById(id);  // Asegúrate de que esta función devuelve el veterinario esperado y su contraseña
+        if (!veterinarian || !veterinarian.Contrasena) {
+            return res.status(404).json({ message: 'Veterinario no encontrado o contraseña no definida' });
+        }
+
+        const isValid = await bcrypt.compare(currentPassword, veterinarian.Contrasena);
+        if (!isValid) {
+            return res.status(401).json({ message: 'Contraseña actual incorrecta' });
+        }
+
+        const hashedNewPassword = await bcrypt.hash(newPassword, 12);
+        await Veterinario.updatePassword(id, hashedNewPassword);
+        res.status(200).json({ message: "Contraseña actualizada correctamente" });
+    } catch (error) {
+        console.error("Error updating password:", error);
+        res.status(500).json({ message: "Error al actualizar la contraseña", error: error.message });
+    }
+};

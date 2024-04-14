@@ -1,0 +1,16 @@
+/* Asegúrate de que el archivo CSS esté vinculado correctamente a tu componente o agregado en el estilo global */
+*,
+*::before,
+*::after {
+    box-sizing: border-box; /* Incluye padding y border en la dimensión del elemento */
+}
+
+.bg-light {
+    min-height: 100vh; /* Asegura que cubre al menos la ventana visible */
+    overflow-y: auto; /* Permite scroll sólo si es necesario */
+}
+
+
+.nav-pills {
+    overflow-y: auto; /* Permite scroll en nav-pills si es necesario, pero el contenedor principal no tiene scroll */
+}

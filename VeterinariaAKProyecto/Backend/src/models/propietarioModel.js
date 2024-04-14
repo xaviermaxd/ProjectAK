@@ -1,9 +1,6 @@
 const db = require('../config/db');
 
 class Propietario {
-    static findAll() {
-        return db.execute('CALL sp_GetAllPropietarios()');
-    }
 
     static findById(id) {
         return db.execute('CALL sp_FindPropietarioByID(?)', [id]);
@@ -30,6 +27,16 @@ class Propietario {
     static delete(id) {
         return db.execute('CALL sp_DeletePropietario(?)', [id]);
     }
+
+    static findAll(offset, limit) {
+        return db.execute('CALL sp_GetAllPropietarios(?, ?)', [offset, limit]);
+    }
+
+    static countAll() {
+        return db.execute('CALL sp_CountAllPropietarios()');
+    }
+    
 }
+
 
 module.exports = Propietario;

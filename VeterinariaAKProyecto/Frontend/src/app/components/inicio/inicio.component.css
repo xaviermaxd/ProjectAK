@@ -1,0 +1,11 @@
+/* src/app/components/inicio/inicio.component.css */
+.sidebar {
+    position: fixed; /* Fija el sidebar para que no se mueva al hacer scroll */
+    top: 0; /* Alinea el sidebar en la parte superior */
+    bottom: 0; /* Alinea el sidebar hasta el final de la vista */
+    overflow-y: auto; /* Permite el scroll dentro del sidebar si el contenido es muy largo */
+}
+
+.ms-sm-auto {
+    margin-left: 200px; /* Ajusta según el ancho de tu sidebar */
+}
