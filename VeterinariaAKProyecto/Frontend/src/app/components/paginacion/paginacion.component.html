@@ -1,0 +1,9 @@
+<div>
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+    <span *ngFor="let page of getPages()">
+      <button *ngIf="page !== '...'" (click)="changePage(+page)" [disabled]="page === currentPage">{{ page }}</button>
+      <span *ngIf="page === '...'">...</span>
+    </span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
+  </div>
+  

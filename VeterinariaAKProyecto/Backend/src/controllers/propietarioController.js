@@ -2,12 +2,20 @@ const Propietario = require('../models/propietarioModel');
 
 exports.getAllPropietarios = async (req, res) => {
     try {
-        const [propietarios, _] = await Propietario.findAll();
-        res.status(200).json(propietarios);
+        const { offset_param, limit_param } = req.query;
+        if (offset_param !== undefined && limit_param !== undefined) {
+            const [propietarios, _] = await Propietario.findAll(offset_param, limit_param);
+            const [totalPropietarios, __] = await Propietario.countAll(); // Obtener el total de propietarios
+            res.status(200).json({ propietarios, totalPropietarios }); // Devolver tanto los propietarios como el total
+        } else {
+            res.status(400).json({ message: "Offset y limit no están definidos correctamente." });
+        }
     } catch (error) {
         res.status(500).json({ message: "Error al obtener propietarios", error: error });
     }
 };
+
+  
 
 exports.getPropietario = async (req, res) => {
     try {
@@ -64,3 +72,16 @@ exports.findPropietarioByNombre = async (req, res) => {
         res.status(500).json({ message: "Error al buscar propietario por nombre", error: error });
     }
 };
+
+exports.getPropietariosPorPagina = async (req, res) => {
+    try {
+      const offset = req.query.offset_param || 0;
+      const limit = req.query.limit_param || 10;
+  
+      const [propietarios, _] = await Propietario.findAll(offset, limit);
+      res.status(200).json(propietarios);
+    } catch (error) {
+      res.status(500).json({ message: "Error al obtener propietarios por página", error: error });
+    }
+  };
+  

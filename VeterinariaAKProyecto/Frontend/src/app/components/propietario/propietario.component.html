@@ -10,6 +10,10 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Propietarios</h1>
         </div>
+        <div>
+          <input type="text" [(ngModel)]="nombreBusqueda" placeholder="Buscar por nombre">
+          <button (click)="searchOwner()">Buscar</button>
+        </div>
         <table class="table">
           <thead>
             <tr>
@@ -35,6 +39,16 @@
             </tr>
           </tbody>
         </table>
+        <div>
+            <app-paginacion
+    [totalItems]="totalPropietarios ? totalPropietarios : 0"
+    [itemsPerPage]="resultadosPorPagina"
+    [currentPage]="paginaActual"
+    (pageChange)="changePage($event)">
+</app-paginacion>
+
+
+        </div>
       </div>
     </div>
   </div>

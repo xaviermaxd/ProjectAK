@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { PropietarioComponent } from './components/propietario/propietario.component';
+
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [

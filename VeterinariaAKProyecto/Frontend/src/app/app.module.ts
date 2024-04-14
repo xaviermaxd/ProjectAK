@@ -1,5 +1,6 @@
 // src/app/app.module.ts
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';  // Importar ReactiveFormsModule
 import { HttpClientModule } from '@angular/common/http';
@@ -10,6 +11,8 @@ import { MenuComponent } from './components/menu/menu.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { PropietarioComponent } from './components/propietario/propietario.component';
+import { PaginacionComponent } from './components/paginacion/paginacion.component';
+
 
 @NgModule({
   declarations: [
@@ -18,13 +21,15 @@ import { PropietarioComponent } from './components/propietario/propietario.compo
     MenuComponent,
     InicioComponent,
     PerfilComponent,
-    PropietarioComponent
+    PropietarioComponent,
+    PaginacionComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,  // Añadir ReactiveFormsModule a los imports
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
