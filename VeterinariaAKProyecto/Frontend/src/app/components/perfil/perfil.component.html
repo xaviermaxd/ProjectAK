@@ -1,4 +1,4 @@
-<!-- src/app/components/inicio/inicio.component.html -->
+<!-- src/app/components/perfil/perfil.component.html -->
 <div class="container-fluid">
     <div class="row">
         <!-- Menú en la parte izquierda -->
@@ -9,11 +9,10 @@
         <!-- Contenido principal en la parte derecha -->
         <div class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Bienvenido al Sistema de Gestión Veterinaria</h1>
+                <h1 class="h2">Perfil del Veterinario</h1>
             </div>
-            <p>Este es el contenido principal de la aplicación.</p>
-            <div *ngIf="veterinario">
-                <h1>Bienvenido, {{ veterinario.Nombre }}</h1>
+            <div *ngIf="veterinario; else loading">
+                <h2>{{ veterinario.Nombre }}</h2>
                 <div>
                     <p>ID: {{ veterinario.VeterinarioID }}</p>
                     <p>Usuario: {{ veterinario.Usuario }}</p>
@@ -22,6 +21,9 @@
                     <p>Correo Electrónico: {{ veterinario.CorreoElectronico }}</p>
                 </div>
             </div>
+            <ng-template #loading>
+                <p>Cargando datos...</p>
+            </ng-template>
         </div>
     </div>
 </div>

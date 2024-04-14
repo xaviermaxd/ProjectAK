@@ -20,6 +20,9 @@ class Veterinario {
     }
 
     static async findByUsuario(usuario) {
+        if (!usuario) {
+            throw new Error("El parámetro 'usuario' no puede ser nulo o indefinido.");
+        }
         try {
             const [results, fields] = await db.execute('CALL sp_FindVeterinarioByUsuario(?)', [usuario]);
             // Asegúrate de acceder al resultado de la forma correcta, esto depende de cómo MySQL devuelve los datos de un procedimiento almacenado
@@ -47,6 +50,20 @@ class Veterinario {
 
     static delete(id) {
         return db.execute('CALL sp_DeleteVeterinario(?)', [id]);
+    }
+
+    static updateInfo(vet) {
+        return db.execute(
+            'CALL sp_UpdateVeterinarioInfo(?, ?, ?, ?, ?, ?)',
+            [vet.VeterinarioID, vet.Nombre, vet.Usuario, vet.Especialidad, vet.Telefono, vet.CorreoElectronico]
+        );
+    }
+
+    static updatePassword(vetID, newPassword) {
+        return db.execute(
+            'CALL sp_UpdateVeterinarioPassword(?, ?)',
+            [vetID, newPassword]
+        );
     }
 }
 

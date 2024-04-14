@@ -16,5 +16,9 @@ router.get('/',veterinarioController.getAllVeterinarios);
 router.get('/:id', veterinarioController.getVeterinario);
 router.put('/:id', veterinarioController.updateVeterinario);
 router.delete('/:id', veterinarioController.deleteVeterinario);
+router.put('/:id/updateinfo', veterinarioController.updateVeterinarioInfo);
+router.put('/:id/updatepassword', veterinarioController.updateVeterinarioPassword);
+router.get('/logout', veterinarioController.logout);
+
 
 module.exports = router;
