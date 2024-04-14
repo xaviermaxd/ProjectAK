@@ -71,10 +71,29 @@ export class VeterinarioService {
     return this.isAuthenticated.asObservable();
   }
 
-  updatePassword(currentPassword: string, newPassword: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/updatePassword`, {
+  updatePassword(veterinarioId: number, currentPassword: string, newPassword: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${veterinarioId}/updatepassword`, {
       currentPassword,
       newPassword
-    }).pipe(catchError(this.handleError));
+    }, { headers: this.getHeaders() }).pipe(
+      catchError(error => {
+        console.error('Error updating password:', error);
+        return throwError(() => new Error('Error updating password'));
+      })
+    );
+  }
+
+  private handleError(error: any): Observable<never> {
+    console.error('An error occurred:', error);
+    return throwError(() => new Error(error.message || 'Some error occurred'));
+  }
+
+  private getHeaders(): HttpHeaders {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers = headers.append('Authorization', `Bearer ${token}`);
+    }
+    return headers;
   }
 }

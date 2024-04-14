@@ -124,12 +124,28 @@ exports.updateVeterinarioInfo = async (req, res) => {
     }
 };
 
+// En tu veterinarioController.js
 exports.updateVeterinarioPassword = async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    const { id } = req.params; // Asegúrate de que el ID se esté recibiendo correctamente.
+    console.log("ID:", id, "Current Password:", currentPassword, "New Password:", newPassword);
+
     try {
-        const newPassword = await bcrypt.hash(req.body.Contrasena, 12);
-        await Veterinario.updatePassword(req.params.id, newPassword);
+        const [veterinarian] = await Veterinario.findById(id);  // Asegúrate de que esta función devuelve el veterinario esperado y su contraseña
+        if (!veterinarian || !veterinarian.Contrasena) {
+            return res.status(404).json({ message: 'Veterinario no encontrado o contraseña no definida' });
+        }
+
+        const isValid = await bcrypt.compare(currentPassword, veterinarian.Contrasena);
+        if (!isValid) {
+            return res.status(401).json({ message: 'Contraseña actual incorrecta' });
+        }
+
+        const hashedNewPassword = await bcrypt.hash(newPassword, 12);
+        await Veterinario.updatePassword(id, hashedNewPassword);
         res.status(200).json({ message: "Contraseña actualizada correctamente" });
     } catch (error) {
-        res.status(500).json({ message: "Error al actualizar la contraseña", error: error });
+        console.error("Error updating password:", error);
+        res.status(500).json({ message: "Error al actualizar la contraseña", error: error.message });
     }
 };

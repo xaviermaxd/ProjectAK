@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { PropietarioComponent } from './components/propietario/propietario.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'inicio', component: InicioComponent}, // Protege esta ruta con AuthGuard
   { path: 'perfil', component: PerfilComponent },
+  { path: 'propietarios', component: PropietarioComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
   // ... puedes añadir aquí otras rutas para otros componentes
 ];

@@ -16,8 +16,17 @@ class Veterinario {
     }
 
     static findById(id) {
-        return db.execute('CALL sp_FindVeterinarioByID(?)', [id]);
+        return db.execute('CALL sp_FindVeterinarioByID(?)', [id])
+            .then(([results, fields]) => {
+                console.log("Datos del veterinario:", results);
+                return results[0]; // Asegúrate de que esto devuelve lo que esperas
+            })
+            .catch(error => {
+                console.error("Error en findById:", error);
+                throw error;
+            });
     }
+    
 
     static async findByUsuario(usuario) {
         if (!usuario) {

@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <div class="row">
+      <!-- Menú en la parte izquierda -->
+      <div class="col-md-2 col-lg-2 bg-light sidebar">
+        <app-menu></app-menu> <!-- Selector del componente de menú -->
+      </div>
+  
+      <!-- Contenido principal en la parte derecha -->
+      <div class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Propietarios</h1>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
+              <th>Correo Electrónico</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let propietario of propietarios">
+              <td>{{ propietario.PropietarioID }}</td>
+              <td>{{ propietario.Nombre }}</td>
+              <td>{{ propietario.Direccion }}</td>
+              <td>{{ propietario.Telefono }}</td>
+              <td>{{ propietario.CorreoElectronico }}</td>
+              <td>
+                <button class="btn btn-primary btn-sm" (click)="onEdit(propietario)">Editar</button>
+                <button class="btn btn-danger btn-sm" (click)="onDelete(propietario.PropietarioID)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

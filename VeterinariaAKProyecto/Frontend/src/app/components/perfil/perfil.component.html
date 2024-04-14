@@ -20,6 +20,24 @@
                     <p>Teléfono: {{ veterinario.Telefono }}</p>
                     <p>Correo Electrónico: {{ veterinario.CorreoElectronico }}</p>
                 </div>
+                <button class="btn btn-primary" (click)="toggleChangePassword()">Actualizar Contraseña</button>
+                <div *ngIf="showChangePasswordForm">
+                    <form [formGroup]="changePasswordForm">
+                        <div class="form-group">
+                            <label>Contraseña Actual</label>
+                            <input type="password" formControlName="currentPassword" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nueva Contraseña</label>
+                            <input type="password" formControlName="newPassword" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirmar Nueva Contraseña</label>
+                            <input type="password" formControlName="confirmNewPassword" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-success" (click)="submitChangePassword()" [disabled]="!changePasswordForm.valid">Guardar Cambios</button>
+                    </form>
+                </div>
             </div>
             <ng-template #loading>
                 <p>Cargando datos...</p>
