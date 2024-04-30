@@ -1,0 +1,72 @@
+/* Estilos generales para la tabla */
+.table-hover {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Estilos para los encabezados de la tabla */
+  .table-hover thead tr {
+    background-color: #68cef3; /* Color de fondo azul */
+    color: white; /* Texto en color blanco */
+}
+thead th .fa-solid {
+    margin-left: 5px; /* Ajusta el valor según sea necesario */
+  }
+
+.table-hover td,
+.table-hover th {
+    padding: 15px; /* Ajusta este valor según tu preferencia */
+}
+
+  
+  /* Estilos para las celdas de la tabla */
+  .table-hover tbody tr {
+    border-bottom: 1px solid #dad6d6; /* Borde inferior para cada fila */
+  }
+  
+
+  
+  .table-hover tbody tr:hover {
+    background-color: #e2f5fd; /* Color de fondo al pasar el mouse */
+  }
+  
+  /* Estilos para los botones dentro de la tabla */
+  .table-hover button.btn {
+    margin-right: 5px; /* Espacio a la derecha del botón */
+  }
+  
+
+  .fa-trash{
+    color:red;
+  }
+  
+  .fa-pen-to-square {
+    color:deepskyblue;
+  }
+  /* Estilos para el icono de búsqueda */
+  .fa-magnifying-glass {
+    color: #007bff; /* Color del icono de búsqueda */
+  }
+
+  .card {
+    margin-bottom: 0;
+    padding: 8px;
+    box-shadow: 0 1px 15px -1px rgb(0, 161, 247);
+
+    .card-body {
+      padding: 20px 25px 20px 40px;
+    }
+
+    @media (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      display: block;
+    }
+  }
+
+  .custom-input-group {
+    width: 500px; /* Ancho fijo para el grupo de entrada */
+  }
+  
+  .custom-input-group h1 {
+    align-self: center; /* Centrar verticalmente el texto */
+  }
+  

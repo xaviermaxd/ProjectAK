@@ -1,9 +1,30 @@
-<div>
+<!-- <div>
     <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
     <span *ngFor="let page of getPages()">
       <button *ngIf="page !== '...'" (click)="changePage(+page)" [disabled]="page === currentPage">{{ page }}</button>
       <span *ngIf="page === '...'">...</span>
     </span>
     <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
+  </div> -->
+  <div class="mt-5 pagination-container">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="javascript:" aria-label="Previous">&laquo;</a>
+        </li>
+      </ul>
+    </nav>
+  
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="javascript:" aria-label="Previous">&laquo;</a>
+        </li>
+      </ul>
+    </nav>
   </div>
+  
+  
+  
+  
   

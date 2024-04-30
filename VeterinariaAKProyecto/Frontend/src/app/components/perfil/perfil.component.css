@@ -1,0 +1,53 @@
+/* Estilos para el contenedor principal */
+.container-fluid {
+    padding: 20px;
+}
+
+/* Estilos para el título del perfil */
+.h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Contenedor adicional para cada sección del perfil */
+.profile-container {
+    background-color: #e6f3ff; /* Celeste */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Sombra */
+}
+
+/* Estilos para cada sección del perfil */
+.profile-section {
+    margin-bottom: 20px;
+}
+
+.profile-section-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.profile-section-content p {
+    margin-bottom: 5px;
+}
+
+/* Estilos para el formulario de actualización de contraseña */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Estilos para el botón de actualización de contraseña */
+.btn-primary, .btn-success {
+    margin-top: 15px;
+}
+
+/* Estilos para la barra de navegación lateral */
+.sidebar {
+    height: 100vh; /* Ajustar según sea necesario */
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow-x: hidden;
+}

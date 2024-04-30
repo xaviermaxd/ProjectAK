@@ -1,47 +1,34 @@
-<!-- src/app/components/perfil/perfil.component.html -->
 <div class="container-fluid">
     <div class="row">
         <!-- Menú en la parte izquierda -->
         <div class="col-md-2 col-lg-2 bg-light sidebar">
             <app-menu></app-menu> <!-- Selector del componente de menú -->
         </div>
-    
-        <!-- Contenido principal en la parte derecha -->
+
         <div class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Perfil del Veterinario</h1>
-            </div>
-            <div *ngIf="veterinario; else loading">
-                <h2>{{ veterinario.Nombre }}</h2>
-                <div>
-                    <p>ID: {{ veterinario.VeterinarioID }}</p>
-                    <p>Usuario: {{ veterinario.Usuario }}</p>
-                    <p>Especialidad: {{ veterinario.Especialidad }}</p>
-                    <p>Teléfono: {{ veterinario.Telefono }}</p>
-                    <p>Correo Electrónico: {{ veterinario.CorreoElectronico }}</p>
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225"  role="img" ><rect width="100%" height="100%" fill="#55595c"/></svg>
+              <div class="col-lg-4">
+                <svg class="bd-placeholder-img rounded-circle" width="140" height="140"  role="img" ><rect width="100%" height="100%" fill="#777"/></svg>
+        
+                <h2>Xavier Mamani Arroyo</h2>
+                <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+              </div>
+        
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-muted">9 mins</small>
                 </div>
-                <button class="btn btn-primary" (click)="toggleChangePassword()">Actualizar Contraseña</button>
-                <div *ngIf="showChangePasswordForm">
-                    <form [formGroup]="changePasswordForm">
-                        <div class="form-group">
-                            <label>Contraseña Actual</label>
-                            <input type="password" formControlName="currentPassword" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Nueva Contraseña</label>
-                            <input type="password" formControlName="newPassword" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Confirmar Nueva Contraseña</label>
-                            <input type="password" formControlName="confirmNewPassword" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-success" (click)="submitChangePassword()" [disabled]="!changePasswordForm.valid">Guardar Cambios</button>
-                    </form>
-                </div>
+              </div>
             </div>
-            <ng-template #loading>
-                <p>Cargando datos...</p>
-            </ng-template>
         </div>
     </div>
 </div>
+
+

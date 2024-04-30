@@ -14,3 +14,11 @@
 .nav-pills {
     overflow-y: auto; /* Permite scroll en nav-pills si es necesario, pero el contenedor principal no tiene scroll */
 }
+
+.dropdown-menu {
+    display: none; /* hide the dropdown menu by default */
+  }
+  
+.dropdown.show .dropdown-menu {
+    display: block; /* show the dropdown menu when the parent item is focused */
+}

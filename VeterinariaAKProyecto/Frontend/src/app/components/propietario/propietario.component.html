@@ -1,28 +1,30 @@
-<div class="container-fluid">
-    <div class="row">
-      <!-- Menú en la parte izquierda -->
-      <div class="col-md-2 col-lg-2 bg-light sidebar">
-        <app-menu></app-menu> <!-- Selector del componente de menú -->
+<div class="row">
+  <!-- Menú en la parte izquierda -->
+  <div class="col-md-2 col-lg-2 bg-light sidebar">
+    <app-menu></app-menu> <!-- Selector del componente de menú -->
+  </div>
+
+  <div class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
+    
+      <div class="input-group mb-5 mt-5 custom-input-group">
+        <h1 class="mb-0 me-3 align-self-center">Propietarios</h1>
+        <input type="text" class="form-control" placeholder="Búsqueda por nombre">
+        <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
       </div>
+      
   
-      <!-- Contenido principal en la parte derecha -->
-      <div class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Propietarios</h1>
-        </div>
-        <div>
-          <input type="text" [(ngModel)]="nombreBusqueda" placeholder="Buscar por nombre">
-          <button (click)="searchOwner()">Buscar</button>
-        </div>
-        <table class="table">
+    <div class="card">
+      
+      <div class="table-responsive">
+        <table class="table-hover">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Dirección</th>
-              <th>Teléfono</th>
-              <th>Correo Electrónico</th>
-              <th>Acciones</th>
+              <th>ID<i class="fa-solid fa-paw"></i></th>
+              <th>Nombre<i class="fa-solid fa-paw"></i></th>
+              <th>Dirección<i class="fa-solid fa-paw"></i></th>
+              <th>Teléfono<i class="fa-solid fa-paw"></i></th>
+              <th>Correo Electrónico<i class="fa-solid fa-paw"></i></th>
+              <th>Acciones<i class="fa-solid fa-paw"></i></th>
             </tr>
           </thead>
           <tbody>
@@ -33,23 +35,44 @@
               <td>{{ propietario.Telefono }}</td>
               <td>{{ propietario.CorreoElectronico }}</td>
               <td>
-                <button class="btn btn-primary btn-sm" (click)="onEdit(propietario)">Editar</button>
-                <button class="btn btn-danger btn-sm" (click)="onDelete(propietario.PropietarioID)">Eliminar</button>
+                <button class="btn btn-primary btn-sm" (click)="onEdit(propietario)"><i class="fa-solid fa-pen-to-square"></i>Editar</button>
+                <button class="btn btn-danger btn-sm" (click)="onDelete(propietario.PropietarioID)"><i class="fa-solid fa-trash"></i>Eliminar</button>
+              </td>
+            </tr>
+            <!-- Fila de ejemplo -->
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>
+                <button class="btn btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button class="btn btn-sm"><i class="fa-solid fa-trash"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>
+                <button class="btn btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button class="btn btn-sm"><i class="fa-solid fa-trash"></i></button>
               </td>
             </tr>
           </tbody>
         </table>
-        <div>
-            <app-paginacion
-    [totalItems]="totalPropietarios ? totalPropietarios : 0"
-    [itemsPerPage]="resultadosPorPagina"
-    [currentPage]="paginaActual"
-    (pageChange)="changePage($event)">
-</app-paginacion>
-
-
-        </div>
       </div>
     </div>
+    <div>
+      <app-paginacion
+        [totalItems]="totalPropietarios ? totalPropietarios : 0"
+        [itemsPerPage]="resultadosPorPagina"
+        [currentPage]="paginaActual"
+         (pageChange)="changePage($event)">
+      </app-paginacion>
+
   </div>
-  
+</div>
